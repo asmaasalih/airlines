@@ -1,0 +1,22 @@
+
+
+<h1>flight detail</h1>
+<p>{{ flight.date }}</p>
+<p>{{ flight.origin }}  -  {{ flight.destination }}</p>
+<p>{{ flight.price}}</p>
+<p>{{ flight.departure_time}} - {{ flight.arrival_time }}</p>
+<p>{{flight.get_total_price}}</p>
+<a href="{% url 'cart-add' flight.id %}" class="btn btn-success">Add to Cart</a>
+<hr>
+<h2>user info</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form1 }}
+</form>
+<hr>
+<h2>passenger info</h2>
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ form2 }}
+    <input type="submit" value="OK">
+</form>

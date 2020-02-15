@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    <form action="{% url 'search_results' %}" method="GET">
+        <input type="radio" id="one-way" name="trip" value="1" onchange="IsOneWay()">
+        <label for="one-way">One Way</label>
+
+        <input type="radio" id="return" name="trip" value="2" checked onchange="IsReturn()">
+        <label for="return">Return</label><br>
+
+        <label for="origin">Flying From</label>
+        <input type="text" id="origin" name="origin" placeholder="From..."><br>
+
+        <label for="destination">Flying To</label>
+        <input type="text" id="destination" name="destination" placeholder="To..."><br>
+
+        <!--<label for="departure_date">Departure Date</label>-->
+        <input type="date" id="departure_date" name="departure_date" placeholder="Select departure date"> <br>
+        
+        <!--<label for="return_date">Return Date</label>-->
+        <input type="date" id="return_date" name="return_date" placeholder="Select return date">
+         <br>
+        <input type="submit" value="Search"/>
+    </form>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script>
+        function IsOneWay(){
+            var elem = document.getElementById("return_date");
+            elem.style.display= "none";
+        };
+
+        function IsReturn(){
+            var elem = document.getElementById("return_date");
+            elem.style.display= "inline";
+        };
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights List</title>
+</head>
+<body>
+    <h1>Select your flights </h1>
+    <div style="float: left; width: 75%;">
+    <div>
+        <p>Please select you departure flight</p>
+        {% if object_list %}
+        <h2>{{flight.origin}} -->> {{flight.destination}}</h2>
+        {% for f in object_list %}
+	        <div>
+                <input type="radio" value="{{ f.id }}" name="flight"/>
+		        <p>{{ f.date }}</p>
+		        <p>{{ f.origin }}  -->>  {{ f.destination }}</p>
+                <p>{{ f.departure_time}} -->> {{ f.arrival_time }}</p>
+                <p>{{ f.price }}$</p>
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %} 
+        <p>Sorry, there are no flights available on the date you've selected. Please choose another date. </p>
+    {% endif %}
+    </div>
+
+    <a id="continue" onclick="go()">continue</a>
+    <div>
+    {% if return_list %}
+        <h1> Select Your Return Flight</h1>   
+            {% for flight in return_list %}
+	            <div>
+                    <input type="radio" value="{{ flight.id}}" name="returnFlight"/>
+		            <p>{{ flight.date }}</p>
+		            <p>{{ flight.origin }}  -  {{ flight.destination }}</p>
+                    <p>{{ flight.departure_time}} - {{ flight.arrival_time }}</p>
+                    <p>{{ flight.price}} $</p>
+                    <hr>
+                </div>
+            {% endfor %}
+        <a id="con" onclick="Return()">continue</a>
+    {% endif %}    
+    </div>
+    </div>
+    <div style="float: left; width: 24%; height: 400px; border: 3px solid;">Your Booking</div>
+    <script>
+        function go() { 
+            var elem = document.getElementsByName('flight');
+			var x = 0;
+			for( x = 0; x < elem.length ; x++ ){
+				if(elem[x].checked){
+					document.getElementById("continue").href = 'http://127.0.0.1:8000/'+elem[x].value;
+				}
+			} 
+        }; 
+
+        function Return() { 
+            var ele = document.getElementsByName('returnFlight');
+			var x = 0;
+			for( x = 0; x < ele.length ; x++ ){
+				if(ele[x].checked){
+					document.getElementById("con").href = 'http://127.0.0.1:8000/'+ele[x].value;
+				}
+			} 
+        } ;
+    </script>
+</body>
+</html>

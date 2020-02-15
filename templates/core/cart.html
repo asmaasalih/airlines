@@ -1,0 +1,40 @@
+<div>
+    <div>
+        <h2>You Cart</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Flight Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart in carts %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <td>{{ cart.item.origin }} - {{ cart.item.destination }}</td>
+                <td>
+                    <a href="{% url 'decrease-cart' cart.item.id %}">minus</a>
+                        {{ cart.quantity }}
+                    <a href="{% url 'cart-add' cart.item.id %}">plus</a>
+                </td>
+                <td>{{ cart.get_total }} </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th></th>
+                <td>Total</td>
+                <td>{{ order.get_totals | floatformat }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <button>Proceed To Checkout</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
